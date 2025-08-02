@@ -1,16 +1,23 @@
 import pandas as pd
+import csv
 
+lb = "==============================================================================="
 df = pd.read_csv('expenses.csv')
 
-by_date = df["Date"].sort_values
-Amount = df["Amount"]
-Descriptions = df["Descriptions"]
-print(Descriptions)
+by_date = df.sort_values(by="Date", ascending=True)
 
+Descriptions = df.sort_values(by="Description", ascending=True)
 
-""" total_spent = df["Amount"].sum().round(2)
+sorted_df = df.sort_values(by="Amount", ascending=False)
 
-print(df[["Date", "Amount"]])
+total_spent = df["Amount"].sum().round(2)
 
-print(by_date)
-print(total_spent) """
+by_date.to_csv('daily_summary.csv', index=False)
+Descriptions.to_csv('categpry_summary.csv', index=False)
+
+"""print(lb)
+print(sorted_df[["Description", "Amount"]])
+print(lb)
+print(by_date[["Date", "Amount"]])
+print(lb)
+print(total_spent)"""
